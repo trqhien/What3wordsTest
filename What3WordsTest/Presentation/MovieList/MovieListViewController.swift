@@ -9,12 +9,13 @@ import UIKit
 import Resolver
 import Combine
 import TinyConstraints
+import CombineCocoa
 
 final class MovieListViewController: UIViewController {
     @Injected
     private var viewModel: MoviewListViewModel
     
-    private let scrollToBottom = PassthroughSubject<Bool, Never>()
+    private let scrollToBottom = PassthroughSubject<Void, Never>()
     
     private var subscriptions = Set<AnyCancellable>()
     
@@ -50,19 +51,13 @@ final class MovieListViewController: UIViewController {
         return tableView
     }()
     
-    private lazy var searchController: UISearchController = {
-           let controller = UISearchController(searchResultsController: nil)
-//           controller.searchResultsUpdater = self
-           controller.dimsBackgroundDuringPresentation = false
-           controller.searchBar.placeholder = "Search for movie titles..."
-           controller.searchBar.prompt = "This is lit"
-           controller.searchBar.tintColor = .lightGray
-           controller.searchBar.searchBarStyle = .minimal
-           definesPresentationContext = false
-           controller.hidesNavigationBarDuringPresentation = false
-//           controller.delegate = self
-           return controller
-       }()
+    private lazy var searchBar: UISearchBar = {
+        let view = UISearchBar()
+        view.placeholder = "Search for movie titles..."
+        view.searchBarStyle = .minimal
+//        view.delegate = self
+        return view
+    }()
     
     private lazy var activityIndicator: UIActivityIndicatorView! = {
         let indicator = UIActivityIndicatorView()
@@ -96,7 +91,7 @@ final class MovieListViewController: UIViewController {
     
     private func configUI() {
         view.backgroundColor = .white
-        navigationItem.titleView = searchController.searchBar
+        navigationItem.titleView = searchBar
         
         view.addSubview(tableView)
         view.addSubview(activityIndicator)
@@ -117,23 +112,21 @@ final class MovieListViewController: UIViewController {
     }
     
     private func bind(to viewModel: MoviewListViewModel) {
-        viewModel.$trendingMovies
+        viewModel.$displayedMovies
             .receive(on: DispatchQueue.main)
             .sink { [weak self] movies in
-                self?.update(with: movies)
+                self?.update(with: movies.elements)
             }
             .store(in: &subscriptions)
         
-        viewModel.$isLoadingTrendingMovies
+        viewModel.$isLoading
             .receive(on: DispatchQueue.main)
             .sink { [weak self] isLoading in
                 if isLoading {
                     self?.activityIndicator.startAnimating()
-//                    self?.activityIndicator.isHidden = false
                     self?.tableView.isHidden = true
                 } else{
                     self?.activityIndicator?.stopAnimating()
-//                    self?.activityIndicator.isHidden = true
                     self?.tableView.isHidden = false
                 }
             }
@@ -165,6 +158,7 @@ final class MovieListViewController: UIViewController {
             .store(in: &subscriptions)
         
         viewModel.bind(loadMoretrigger: scrollToBottom.eraseToAnyPublisher())
+        viewModel.bind(searchQuery: searchBar.textDidChangePublisher)
     }
 }
 
@@ -181,16 +175,14 @@ extension MovieListViewController: UITableViewDelegate {
 extension MovieListViewController: UIScrollViewDelegate {
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        searchController.searchBar.resignFirstResponder()
+        searchBar.resignFirstResponder()
         
-        let offsetY = scrollView.contentOffset.y
+        let postion = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
         let screenHeight = scrollView.frame.size.height
         
-        let postion = scrollView.contentOffset.y
-        
         if postion > contentHeight - screenHeight - 100 {
-            scrollToBottom.send(true)
+            scrollToBottom.send()
         }
     }
 }
@@ -198,10 +190,11 @@ extension MovieListViewController: UIScrollViewDelegate {
 extension MovieListViewController {
     enum Section: String, CaseIterable {
         case trending
-        case loadMore
+//        case search
+//        case loadMore
     }
     
-    func update(with movies: [Movie], animate: Bool = true) {
+    func update(with movies: [Movie], animate: Bool = false) {
         DispatchQueue.main.async {
             var snapshot = NSDiffableDataSourceSnapshot<Section, Movie>()
             snapshot.appendSections([.trending])

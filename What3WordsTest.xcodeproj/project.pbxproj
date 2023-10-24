@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E16359C2AE66FB100EF3C44 /* DateFormatter+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E16359B2AE66FB100EF3C44 /* DateFormatter+Ext.swift */; };
+		0E16359E2AE6739D00EF3C44 /* SearchAPIServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E16359D2AE6739D00EF3C44 /* SearchAPIServiceType.swift */; };
+		0E1635A02AE674A800EF3C44 /* SearchAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E16359F2AE674A800EF3C44 /* SearchAPIService.swift */; };
+		0E1635A32AE77AA900EF3C44 /* CombineExt in Frameworks */ = {isa = PBXBuildFile; productRef = 0E1635A22AE77AA900EF3C44 /* CombineExt */; };
 		0E23006D2AE2982100F69E9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E23006C2AE2982100F69E9B /* AppDelegate.swift */; };
 		0E23006F2AE2982100F69E9B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E23006E2AE2982100F69E9B /* SceneDelegate.swift */; };
 		0E2300762AE2982300F69E9B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E2300752AE2982300F69E9B /* Assets.xcassets */; };
@@ -36,6 +40,8 @@
 		0E2300D72AE4ECAB00F69E9B /* UIEdgeInsets+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2300D62AE4ECAB00F69E9B /* UIEdgeInsets+Ext.swift */; };
 		0E2300D92AE5012900F69E9B /* UITableView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2300D82AE5012900F69E9B /* UITableView+Reusable.swift */; };
 		0E2300DB2AE5050400F69E9B /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2300DA2AE5050400F69E9B /* MovieCell.swift */; };
+		0E89C5CE2AE7806200E2BDAF /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89C5CD2AE7806200E2BDAF /* String+Ext.swift */; };
+		0E89C5D12AE7A23400E2BDAF /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 0E89C5D02AE7A23400E2BDAF /* OrderedCollections */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +62,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0E16359B2AE66FB100EF3C44 /* DateFormatter+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Ext.swift"; sourceTree = "<group>"; };
+		0E16359D2AE6739D00EF3C44 /* SearchAPIServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAPIServiceType.swift; sourceTree = "<group>"; };
+		0E16359F2AE674A800EF3C44 /* SearchAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAPIService.swift; sourceTree = "<group>"; };
 		0E2300692AE2982100F69E9B /* What3WordsTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = What3WordsTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E23006C2AE2982100F69E9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E23006E2AE2982100F69E9B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +93,7 @@
 		0E2300D62AE4ECAB00F69E9B /* UIEdgeInsets+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIEdgeInsets+Ext.swift"; sourceTree = "<group>"; };
 		0E2300D82AE5012900F69E9B /* UITableView+Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Reusable.swift"; sourceTree = "<group>"; };
 		0E2300DA2AE5050400F69E9B /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
+		0E89C5CD2AE7806200E2BDAF /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +105,8 @@
 				0E2300A52AE3A4EA00F69E9B /* Codextended in Frameworks */,
 				0E2300D42AE4E1B500F69E9B /* TinyConstraints in Frameworks */,
 				0E2300D12AE4258F00F69E9B /* CombineCocoa in Frameworks */,
+				0E1635A32AE77AA900EF3C44 /* CombineExt in Frameworks */,
+				0E89C5D12AE7A23400E2BDAF /* OrderedCollections in Frameworks */,
 				0E2300A22AE3A00200F69E9B /* CombineMoya in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -182,6 +194,8 @@
 		0E23009D2AE39EF000F69E9B /* Domains */ = {
 			isa = PBXGroup;
 			children = (
+				0E2300C02AE3DDEC00F69E9B /* TrendingAPIServiceType.swift */,
+				0E16359D2AE6739D00EF3C44 /* SearchAPIServiceType.swift */,
 			);
 			path = Domains;
 			sourceTree = "<group>";
@@ -273,7 +287,6 @@
 			isa = PBXGroup;
 			children = (
 				0E2300BE2AE3DDCA00F69E9B /* TrendingAPIService.swift */,
-				0E2300C02AE3DDEC00F69E9B /* TrendingAPIServiceType.swift */,
 			);
 			path = TrendingRepository;
 			sourceTree = "<group>";
@@ -281,6 +294,7 @@
 		0E2300BD2AE3DD4C00F69E9B /* SearchRepository */ = {
 			isa = PBXGroup;
 			children = (
+				0E16359F2AE674A800EF3C44 /* SearchAPIService.swift */,
 			);
 			path = SearchRepository;
 			sourceTree = "<group>";
@@ -298,6 +312,8 @@
 			children = (
 				0E2300D62AE4ECAB00F69E9B /* UIEdgeInsets+Ext.swift */,
 				0E2300D82AE5012900F69E9B /* UITableView+Reusable.swift */,
+				0E16359B2AE66FB100EF3C44 /* DateFormatter+Ext.swift */,
+				0E89C5CD2AE7806200E2BDAF /* String+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -324,6 +340,8 @@
 				0E2300A72AE3A94600F69E9B /* Resolver */,
 				0E2300D02AE4258F00F69E9B /* CombineCocoa */,
 				0E2300D32AE4E1B500F69E9B /* TinyConstraints */,
+				0E1635A22AE77AA900EF3C44 /* CombineExt */,
+				0E89C5D02AE7A23400E2BDAF /* OrderedCollections */,
 			);
 			productName = What3WordsTest;
 			productReference = 0E2300692AE2982100F69E9B /* What3WordsTest.app */;
@@ -403,6 +421,8 @@
 				0E2300A62AE3A94600F69E9B /* XCRemoteSwiftPackageReference "Resolver" */,
 				0E2300CF2AE4258F00F69E9B /* XCRemoteSwiftPackageReference "CombineCocoa" */,
 				0E2300D22AE4E1B500F69E9B /* XCRemoteSwiftPackageReference "TinyConstraints" */,
+				0E1635A12AE77AA900EF3C44 /* XCRemoteSwiftPackageReference "CombineExt" */,
+				0E89C5CF2AE7A23400E2BDAF /* XCRemoteSwiftPackageReference "swift-collections" */,
 			);
 			productRefGroup = 0E23006A2AE2982100F69E9B /* Products */;
 			projectDirPath = "";
@@ -452,6 +472,8 @@
 				0E2300C32AE3DFBF00F69E9B /* Movie.swift in Sources */,
 				0E2300C92AE3E6DD00F69E9B /* MoyaClient.swift in Sources */,
 				0E2300D72AE4ECAB00F69E9B /* UIEdgeInsets+Ext.swift in Sources */,
+				0E1635A02AE674A800EF3C44 /* SearchAPIService.swift in Sources */,
+				0E89C5CE2AE7806200E2BDAF /* String+Ext.swift in Sources */,
 				0E2300C72AE3E4DF00F69E9B /* NetworkError.swift in Sources */,
 				0E2300AF2AE3D6A800F69E9B /* BaseTargetType.swift in Sources */,
 				0E2300B32AE3DA9D00F69E9B /* SearchAPI.swift in Sources */,
@@ -460,8 +482,10 @@
 				0E2300CE2AE3ED2300F69E9B /* App+Inject.swift in Sources */,
 				0E2300C52AE3E34900F69E9B /* PaginationResponse.swift in Sources */,
 				0E2300B12AE3D75900F69E9B /* TrendingAPI.swift in Sources */,
+				0E16359E2AE6739D00EF3C44 /* SearchAPIServiceType.swift in Sources */,
 				0E2300CB2AE3ECF000F69E9B /* MovieListViewModel.swift in Sources */,
 				0E23006D2AE2982100F69E9B /* AppDelegate.swift in Sources */,
+				0E16359C2AE66FB100EF3C44 /* DateFormatter+Ext.swift in Sources */,
 				0E23006F2AE2982100F69E9B /* SceneDelegate.swift in Sources */,
 				0E2300DB2AE5050400F69E9B /* MovieCell.swift in Sources */,
 				0E2300AB2AE3A97700F69E9B /* MovieListViewController.swift in Sources */,
@@ -798,6 +822,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0E1635A12AE77AA900EF3C44 /* XCRemoteSwiftPackageReference "CombineExt" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CombineCommunity/CombineExt#assign";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		0E2300A02AE3A00200F69E9B /* XCRemoteSwiftPackageReference "Moya" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Moya/Moya.git";
@@ -838,9 +870,22 @@
 				kind = branch;
 			};
 		};
+		0E89C5CF2AE7A23400E2BDAF /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0E1635A22AE77AA900EF3C44 /* CombineExt */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0E1635A12AE77AA900EF3C44 /* XCRemoteSwiftPackageReference "CombineExt" */;
+			productName = CombineExt;
+		};
 		0E2300A12AE3A00200F69E9B /* CombineMoya */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0E2300A02AE3A00200F69E9B /* XCRemoteSwiftPackageReference "Moya" */;
@@ -865,6 +910,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0E2300D22AE4E1B500F69E9B /* XCRemoteSwiftPackageReference "TinyConstraints" */;
 			productName = TinyConstraints;
+		};
+		0E89C5D02AE7A23400E2BDAF /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0E89C5CF2AE7A23400E2BDAF /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

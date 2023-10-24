@@ -19,4 +19,34 @@ struct PaginationResponse<M: Decodable>: Decodable {
         totalResults = try decoder.decode("total_results")
         results = try decoder.decode("results")
     }
+    
+    private init(
+        page: Int,
+        totalPages: Int,
+        totalResults: Int,
+        results: [M]
+    ) {
+        self.page = page
+        self.totalPages = totalPages
+        self.totalResults = totalResults
+        self.results = results
+    }
+}
+
+extension PaginationResponse {
+    var isEmpty: Bool {
+        return page == 0
+            && totalPages == 0
+            && totalResults == 0
+            && results.isEmpty
+    }
+    
+    static var empty: PaginationResponse {
+        return PaginationResponse(
+            page: 0,
+            totalPages: 0,
+            totalResults: 0,
+            results: []
+        )
+    }
 }

@@ -32,7 +32,6 @@ extension SearchAPI: BaseTargetType {
             return .requestParameters(
                 parameters: [
                     "query": queryString,
-                    "language": "en-US",
                     "include_adult": false,
                     "page": "\(page)"
                 ],

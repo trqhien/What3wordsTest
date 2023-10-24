@@ -9,10 +9,8 @@ import Foundation
 import CombineMoya
 import Combine
 
-class TrendingAPIService: TrendingAPIServiceType {
+struct TrendingAPIService: TrendingAPIServiceType {
     let client = MoyaClient<TrendingAPI>()
-    
-    private var subscriptions = Set<AnyCancellable>()
 
     func getTrendingMovie(timeWindow: TimeWindow, page: Int) -> AnyPublisher<PaginationResponse<Movie>, NetworkError> {
         

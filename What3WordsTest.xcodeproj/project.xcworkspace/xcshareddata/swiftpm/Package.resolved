@@ -28,6 +28,15 @@
       }
     },
     {
+      "identity" : "combineext#assign",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/CombineCommunity/CombineExt#assign",
+      "state" : {
+        "branch" : "main",
+        "revision" : "d7b896fa9ca8b47fa7bcde6b43ef9b70bf8c1f56"
+      }
+    },
+    {
       "identity" : "moya",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Moya/Moya.git",
@@ -61,6 +70,15 @@
       "state" : {
         "revision" : "9dcaa4b333db437b0fbfaf453fad29069044a8b4",
         "version" : "6.6.0"
+      }
+    },
+    {
+      "identity" : "swift-collections",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-collections.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "939cfd25234472b4dc91c3caeab304d15bca9a73"
       }
     },
     {

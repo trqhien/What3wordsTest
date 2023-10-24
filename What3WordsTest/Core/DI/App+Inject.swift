@@ -12,8 +12,6 @@ extension Resolver: ResolverRegistering {
       public static func registerAllServices() {
           register { MoviewListViewModel() }
           register { TrendingAPIService() }.implements(TrendingAPIServiceType.self)
-        //    register { resolver, args in
-        //          //
-        //      }
+          register { SearchAPIService() }.implements(SearchAPIServiceType.self)
       }
 }

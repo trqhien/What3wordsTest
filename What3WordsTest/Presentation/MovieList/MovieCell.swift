@@ -79,9 +79,11 @@ class MovieCell: UITableViewCell {
         ratingLabel.backgroundColor = movie.voteAverage >= 5.0
             ? .systemGreen
             : .systemRed
-//        if let releaseDate = movie.releaseDate {
-//            dateLabel.text = DateFormatter.appFormat.string(from: releaseDate)
-//        }
+        
+        if let releaseDate = movie.releaseDate {
+            dateLabel.text = "\(Calendar.current.component(.year, from: releaseDate))"
+        }
+
         overviewLabel.text = movie.overview
     }
 
@@ -95,29 +97,29 @@ class MovieCell: UITableViewCell {
 
         posterImageView.topToSuperview(offset: 8)
         posterImageView.leftToSuperview(offset: 8)
-        posterImageView.bottom(to: contentView, relation: .equalOrLess)
+        posterImageView.bottomToSuperview(offset: -8, relation: .equalOrLess)
         posterImageView.size(CGSize(width: 70, height: 100))
 
         titleLabel.top(to: posterImageView)
         titleLabel.leftToRight(of: posterImageView, offset: 8)
         titleLabel.rightToSuperview()
+        
+        dateLabel.topToBottom(of: titleLabel, offset: 8)
+        dateLabel.left(to: titleLabel)
+        dateLabel.rightToSuperview()
 
-        overviewLabel.topToBottom(of: titleLabel, offset: 8)
+        overviewLabel.topToBottom(of: dateLabel, offset: 8)
         overviewLabel.left(to: titleLabel)
         overviewLabel.rightToSuperview()
 
         ratingLabel.topToBottom(of: overviewLabel, offset: 8)
         ratingLabel.left(to: titleLabel)
         ratingLabel.width(50)
+        ratingLabel.bottomToSuperview(offset: -8, relation: .equalOrLess)
 
         voteCountLabel.leftToRight(of: ratingLabel, offset: 8)
         voteCountLabel.rightToSuperview(relation: .equalOrLess)
         voteCountLabel.bottom(to: ratingLabel)
-
-        dateLabel.topToBottom(of: ratingLabel, offset: 8)
-        dateLabel.left(to: titleLabel)
-        dateLabel.rightToSuperview()
-        dateLabel.bottomToSuperview(relation: .equalOrLess)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
