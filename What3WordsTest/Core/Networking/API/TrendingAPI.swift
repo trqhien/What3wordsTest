@@ -43,8 +43,4 @@ extension TrendingAPI: BaseTargetType {
             )
         }
     }
-    
-    var headers: [String : String]? {
-        return nil
-    }
 }

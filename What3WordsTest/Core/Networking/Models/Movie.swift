@@ -24,7 +24,7 @@ struct Movie: Decodable {
 //    "video": false,
     let voteAverage: Double
     let voteCount: Int
-    
+
     init(from decoder: Decoder) throws {
         isAdult = try decoder.decode("adult")
         backdropPath = try decoder.decodeIfPresent("backdrop_path")

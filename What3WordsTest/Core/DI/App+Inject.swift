@@ -10,8 +10,10 @@ import Resolver
 
 extension Resolver: ResolverRegistering {
       public static func registerAllServices() {
-          register { MoviewListViewModel() }
+          register { MovieListViewModel() }
+          register { MovieDetailsViewModel() }
           register { TrendingAPIService() }.implements(TrendingAPIServiceType.self)
           register { SearchAPIService() }.implements(SearchAPIServiceType.self)
+          register { MoviesAPIService() }.implements(MoviesAPIServiceType.self)
       }
 }

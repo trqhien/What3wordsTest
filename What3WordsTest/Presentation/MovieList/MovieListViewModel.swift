@@ -65,7 +65,7 @@ enum Either<Left, Right> {
 }
 
 // TODO: Create State machine
-final class MoviewListViewModel {
+final class MovieListViewModel {
     @LazyInjected private var trendingAPIService: TrendingAPIServiceType
     @LazyInjected private var searchAPIService: SearchAPIServiceType
     
@@ -83,6 +83,7 @@ final class MoviewListViewModel {
     @Published var isLoadingMoreSearch: Bool = false
     
 //    @Published var emptyState: Either<Bool, String>
+    // TODO: Add coordinator
     
     @Published var displayedMovies: OrderedSet<Movie> = []
     @Published var isLoading: Bool = false

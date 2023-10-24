@@ -13,9 +13,10 @@ import CombineCocoa
 
 final class MovieListViewController: UIViewController {
     @Injected
-    private var viewModel: MoviewListViewModel
+    private var viewModel: MovieListViewModel
     
     private let scrollToBottom = PassthroughSubject<Void, Never>()
+//    private let selection = PassthroughSubject<Int, Never>()
     
     private var subscriptions = Set<AnyCancellable>()
     
@@ -32,18 +33,13 @@ final class MovieListViewController: UIViewController {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.isScrollEnabled = true
         tableView.separatorStyle = .singleLine
-//        tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 50
-//        tableView.tableFooterView = UIView(frame: .zero)
         tableView.backgroundColor = .white
         tableView.separatorColor = .lightGray
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         tableView.indicatorStyle = .white
         tableView.keyboardDismissMode = .interactive
         tableView.showsVerticalScrollIndicator = true
-//        tableView.insertSubview(refreshControl, at: 0)
-//        tableView.keyboardDismissMode = .interactive
-//                tableView.insertSubview(refreshControl, at: 0)
         tableView.register(MovieCell.self)
         tableView.delegate = self
         tableView.tableFooterView = loadMoreActivityIndicator
@@ -55,7 +51,6 @@ final class MovieListViewController: UIViewController {
         let view = UISearchBar()
         view.placeholder = "Search for movie titles..."
         view.searchBarStyle = .minimal
-//        view.delegate = self
         return view
     }()
     
@@ -111,7 +106,7 @@ final class MovieListViewController: UIViewController {
         tableViewDataSource.apply(initialSnapshot, animatingDifferences: false)
     }
     
-    private func bind(to viewModel: MoviewListViewModel) {
+    private func bind(to viewModel: MovieListViewModel) {
         viewModel.$displayedMovies
             .receive(on: DispatchQueue.main)
             .sink { [weak self] movies in
@@ -163,17 +158,18 @@ final class MovieListViewController: UIViewController {
 }
 
 extension MovieListViewController: UITableViewDelegate {
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //        let snapshot = tableViewDataSource.snapshot()
-        //        selection.send(snapshot.itemIdentifiers[indexPath.row].id)
+        let snapshot = tableViewDataSource.snapshot()
+        let id = snapshot.itemIdentifiers[indexPath.row].id
+        
+        // TODO: Use coordinator to ochestrate this
+//        selection.send(snapshot.itemIdentifiers[indexPath.row].id)
+        navigationController?.pushViewController(MovieDetailsViewController(movieId: id), animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
 }
 
 extension MovieListViewController: UIScrollViewDelegate {
-
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         searchBar.resignFirstResponder()
         

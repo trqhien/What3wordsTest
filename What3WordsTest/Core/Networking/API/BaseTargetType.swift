@@ -19,4 +19,8 @@ extension BaseTargetType {
         }
         return url
     }
+    
+    var headers: [String : String]? {
+        return nil
+    }
 }
