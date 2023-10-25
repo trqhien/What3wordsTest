@@ -12,6 +12,7 @@ final class MoyaClient<T: BaseTargetType>: MoyaProvider<T> {
         super.init(
             plugins: [
                 CommonHeadersPlugin(),
+                CachePolicyPlugin()
 //                NetworkLoggerPlugin()
             ]
         )

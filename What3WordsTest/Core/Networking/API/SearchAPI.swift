@@ -37,8 +37,10 @@ extension SearchAPI: BaseTargetType {
                 ],
                 encoding: URLEncoding.queryString
             )
-            
-            
         }
+    }
+    
+    var cachePolicy: CachePolicy? {
+        return .reloadIgnoringLocalCacheData
     }
 }

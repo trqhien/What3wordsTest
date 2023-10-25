@@ -43,4 +43,8 @@ extension TrendingAPI: BaseTargetType {
             )
         }
     }
+    
+    var cachePolicy: CachePolicy? {
+        return .returnCacheDataElseLoad
+    }
 }

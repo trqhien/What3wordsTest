@@ -32,6 +32,10 @@ extension MoviesAPI: BaseTargetType {
             return .requestPlain
         }
     }
+    
+    var cachePolicy: CachePolicy? {
+        return .returnCacheDataElseLoad
+    }
 }
 
 

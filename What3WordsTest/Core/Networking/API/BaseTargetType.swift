@@ -8,7 +8,7 @@
 import Moya
 import Foundation
 
-protocol BaseTargetType: TargetType {}
+protocol BaseTargetType: CacheableTargetType {}
 
 extension BaseTargetType {
     var baseURL: URL {
@@ -21,6 +21,10 @@ extension BaseTargetType {
     }
     
     var headers: [String : String]? {
+        return nil
+    }
+    
+    var cachePolicy: CachePolicy? {
         return nil
     }
 }
