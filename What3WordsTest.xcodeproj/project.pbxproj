@@ -22,7 +22,6 @@
 		0E23006F2AE2982100F69E9B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E23006E2AE2982100F69E9B /* SceneDelegate.swift */; };
 		0E2300762AE2982300F69E9B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E2300752AE2982300F69E9B /* Assets.xcassets */; };
 		0E2300792AE2982400F69E9B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E2300772AE2982400F69E9B /* LaunchScreen.storyboard */; };
-		0E2300842AE2982400F69E9B /* What3WordsTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2300832AE2982400F69E9B /* What3WordsTestTests.swift */; };
 		0E23008E2AE2982400F69E9B /* What3WordsTestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E23008D2AE2982400F69E9B /* What3WordsTestUITests.swift */; };
 		0E2300902AE2982400F69E9B /* What3WordsTestUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E23008F2AE2982400F69E9B /* What3WordsTestUITestsLaunchTests.swift */; };
 		0E2300A22AE3A00200F69E9B /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 0E2300A12AE3A00200F69E9B /* CombineMoya */; };
@@ -59,9 +58,18 @@
 		0E5FC6BE2AE9EC5B00558193 /* ImageCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5FC6BD2AE9EC5B00558193 /* ImageCacheService.swift */; };
 		0E5FC6C12AEA076400558193 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 0E5FC6C02AEA076400558193 /* Kingfisher */; };
 		0E5FC6C32AEA1EFD00558193 /* MovieDetailsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5FC6C22AEA1EFD00558193 /* MovieDetailsEntity.swift */; };
+		0E5FC6C62AEA32CE00558193 /* MovieListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5FC6C52AEA32CE00558193 /* MovieListViewModelTests.swift */; };
+		0E5FC6C82AEA372400558193 /* DI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5FC6C72AEA372400558193 /* DI.swift */; };
+		0E5FC6CD2AEA46D000558193 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5FC6CC2AEA46D000558193 /* Mock.swift */; };
+		0E5FC6DA2AEA6F1E00558193 /* Mockingbird in Frameworks */ = {isa = PBXBuildFile; productRef = 0E5FC6D92AEA6F1E00558193 /* Mockingbird */; };
+		0E5FC6DD2AEA832C00558193 /* trending_movies_1.json in Resources */ = {isa = PBXBuildFile; fileRef = 0E5FC6DC2AEA727100558193 /* trending_movies_1.json */; };
+		0E5FC6DF2AEA87B900558193 /* trending_movies_2.json in Resources */ = {isa = PBXBuildFile; fileRef = 0E5FC6DE2AEA87B900558193 /* trending_movies_2.json */; };
+		0E5FC6E22AEACE7B00558193 /* Decodable+loadFromFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5FC6E12AEACE7B00558193 /* Decodable+loadFromFile.swift */; };
+		0E5FC6E52AEACFB000558193 /* MockNetworkPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5FC6E42AEACFB000558193 /* MockNetworkPublisher.swift */; };
 		0E89C5CE2AE7806200E2BDAF /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89C5CD2AE7806200E2BDAF /* String+Ext.swift */; };
 		0E89C5D12AE7A23400E2BDAF /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 0E89C5D02AE7A23400E2BDAF /* OrderedCollections */; };
 		0EF8D7B22AE876870019D9CF /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF8D7B12AE876860019D9CF /* Genre.swift */; };
+		249C9BF14E111574BEC87F85 /* What3WordsTestTests-What3WordsTestMocks.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = D483140D3189DB18EE4464EA /* What3WordsTestTests-What3WordsTestMocks.generated.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,7 +107,6 @@
 		0E2300782AE2982400F69E9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0E23007A2AE2982400F69E9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0E23007F2AE2982400F69E9B /* What3WordsTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = What3WordsTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0E2300832AE2982400F69E9B /* What3WordsTestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = What3WordsTestTests.swift; sourceTree = "<group>"; };
 		0E2300892AE2982400F69E9B /* What3WordsTestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = What3WordsTestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E23008D2AE2982400F69E9B /* What3WordsTestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = What3WordsTestUITests.swift; sourceTree = "<group>"; };
 		0E23008F2AE2982400F69E9B /* What3WordsTestUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = What3WordsTestUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -130,8 +137,16 @@
 		0E5FC6BA2AE9EBDB00558193 /* ImageCacheServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheServiceType.swift; sourceTree = "<group>"; };
 		0E5FC6BD2AE9EC5B00558193 /* ImageCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheService.swift; sourceTree = "<group>"; };
 		0E5FC6C22AEA1EFD00558193 /* MovieDetailsEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsEntity.swift; sourceTree = "<group>"; };
+		0E5FC6C52AEA32CE00558193 /* MovieListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewModelTests.swift; sourceTree = "<group>"; };
+		0E5FC6C72AEA372400558193 /* DI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DI.swift; sourceTree = "<group>"; };
+		0E5FC6CC2AEA46D000558193 /* Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mock.swift; sourceTree = "<group>"; };
+		0E5FC6DC2AEA727100558193 /* trending_movies_1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = trending_movies_1.json; sourceTree = "<group>"; };
+		0E5FC6DE2AEA87B900558193 /* trending_movies_2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = trending_movies_2.json; sourceTree = "<group>"; };
+		0E5FC6E12AEACE7B00558193 /* Decodable+loadFromFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decodable+loadFromFile.swift"; sourceTree = "<group>"; };
+		0E5FC6E42AEACFB000558193 /* MockNetworkPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkPublisher.swift; sourceTree = "<group>"; };
 		0E89C5CD2AE7806200E2BDAF /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		0EF8D7B12AE876860019D9CF /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
+		D483140D3189DB18EE4464EA /* What3WordsTestTests-What3WordsTestMocks.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "What3WordsTestTests-What3WordsTestMocks.generated.swift"; path = "MockingbirdMocks/What3WordsTestTests-What3WordsTestMocks.generated.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +170,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E5FC6DA2AEA6F1E00558193 /* Mockingbird in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,6 +209,7 @@
 				0E2300822AE2982400F69E9B /* What3WordsTestTests */,
 				0E23008C2AE2982400F69E9B /* What3WordsTestUITests */,
 				0E23006A2AE2982100F69E9B /* Products */,
+				F27122E90AA44A63BF8CFAF7 /* Generated Mocks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -225,7 +242,9 @@
 		0E2300822AE2982400F69E9B /* What3WordsTestTests */ = {
 			isa = PBXGroup;
 			children = (
-				0E2300832AE2982400F69E9B /* What3WordsTestTests.swift */,
+				0E5FC6E02AEACE5900558193 /* Helpers */,
+				0E5FC6DB2AEA724400558193 /* mocks */,
+				0E5FC6C52AEA32CE00558193 /* MovieListViewModelTests.swift */,
 			);
 			path = What3WordsTestTests;
 			sourceTree = "<group>";
@@ -416,6 +435,34 @@
 			path = ImageCacheRepositories;
 			sourceTree = "<group>";
 		};
+		0E5FC6DB2AEA724400558193 /* mocks */ = {
+			isa = PBXGroup;
+			children = (
+				0E5FC6DC2AEA727100558193 /* trending_movies_1.json */,
+				0E5FC6DE2AEA87B900558193 /* trending_movies_2.json */,
+			);
+			path = mocks;
+			sourceTree = "<group>";
+		};
+		0E5FC6E02AEACE5900558193 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				0E5FC6E12AEACE7B00558193 /* Decodable+loadFromFile.swift */,
+				0E5FC6C72AEA372400558193 /* DI.swift */,
+				0E5FC6E42AEACFB000558193 /* MockNetworkPublisher.swift */,
+				0E5FC6CC2AEA46D000558193 /* Mock.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		F27122E90AA44A63BF8CFAF7 /* Generated Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				D483140D3189DB18EE4464EA /* What3WordsTestTests-What3WordsTestMocks.generated.swift */,
+			);
+			name = "Generated Mocks";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -451,6 +498,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0E2300962AE2982400F69E9B /* Build configuration list for PBXNativeTarget "What3WordsTestTests" */;
 			buildPhases = (
+				38342F36366D89F7D3C407DB /* Generate Mockingbird Mocks */,
 				0E23007B2AE2982400F69E9B /* Sources */,
 				0E23007C2AE2982400F69E9B /* Frameworks */,
 				0E23007D2AE2982400F69E9B /* Resources */,
@@ -461,6 +509,9 @@
 				0E2300812AE2982400F69E9B /* PBXTargetDependency */,
 			);
 			name = What3WordsTestTests;
+			packageProductDependencies = (
+				0E5FC6D92AEA6F1E00558193 /* Mockingbird */,
+			);
 			productName = What3WordsTestTests;
 			productReference = 0E23007F2AE2982400F69E9B /* What3WordsTestTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -525,6 +576,7 @@
 				0E89C5CF2AE7A23400E2BDAF /* XCRemoteSwiftPackageReference "swift-collections" */,
 				0E5FC6A92AE8C3A100558193 /* XCRemoteSwiftPackageReference "atlantis" */,
 				0E5FC6BF2AEA076400558193 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				0E5FC6D82AEA6F1E00558193 /* XCRemoteSwiftPackageReference "mockingbird" */,
 			);
 			productRefGroup = 0E23006A2AE2982100F69E9B /* Products */;
 			projectDirPath = "";
@@ -551,6 +603,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E5FC6DF2AEA87B900558193 /* trending_movies_2.json in Resources */,
+				0E5FC6DD2AEA832C00558193 /* trending_movies_1.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -562,6 +616,25 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		38342F36366D89F7D3C407DB /* Generate Mockingbird Mocks */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate Mockingbird Mocks";
+			outputPaths = (
+				"$(SRCROOT)/MockingbirdMocks/What3WordsTestTests-What3WordsTestMocks.generated.swift",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -eu\n\n# Prevent Xcode 13 from running this script while indexing.\n[[ \"${ACTION}\" == \"indexbuild\" ]] && exit 0\n\n# Infer the derived data location from the build environment.\n[[ -z \"${DERIVED_DATA+x}\" ]] && DERIVED_DATA=\"$(echo \"${BUILD_ROOT}\" | sed -n 's|\\(.*\\)/Build/.*|\\1|p')\"\n\n\"${DERIVED_DATA}/SourcePackages/checkouts/mockingbird/mockingbird\" generate --targets \"What3WordsTest\" --outputs \"${SRCROOT}/MockingbirdMocks/What3WordsTestTests-What3WordsTestMocks.generated.swift\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0E2300652AE2982100F69E9B /* Sources */ = {
@@ -616,7 +689,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E2300842AE2982400F69E9B /* What3WordsTestTests.swift in Sources */,
+				0E5FC6C62AEA32CE00558193 /* MovieListViewModelTests.swift in Sources */,
+				0E5FC6E52AEACFB000558193 /* MockNetworkPublisher.swift in Sources */,
+				0E5FC6C82AEA372400558193 /* DI.swift in Sources */,
+				0E5FC6E22AEACE7B00558193 /* Decodable+loadFromFile.swift in Sources */,
+				0E5FC6CD2AEA46D000558193 /* Mock.swift in Sources */,
+				249C9BF14E111574BEC87F85 /* What3WordsTestTests-What3WordsTestMocks.generated.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -843,7 +921,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/What3WordsTest.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/What3WordsTest";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/What3WordsTest.app/What3WordsTest";
 			};
 			name = Debug;
 		};
@@ -862,7 +940,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/What3WordsTest.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/What3WordsTest";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/What3WordsTest.app/What3WordsTest";
 			};
 			name = Release;
 		};
@@ -1006,6 +1084,14 @@
 				minimumVersion = 7.0.0;
 			};
 		};
+		0E5FC6D82AEA6F1E00558193 /* XCRemoteSwiftPackageReference "mockingbird" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/birdrides/mockingbird";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		0E89C5CF2AE7A23400E2BDAF /* XCRemoteSwiftPackageReference "swift-collections" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-collections.git";
@@ -1056,6 +1142,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0E5FC6BF2AEA076400558193 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		0E5FC6D92AEA6F1E00558193 /* Mockingbird */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0E5FC6D82AEA6F1E00558193 /* XCRemoteSwiftPackageReference "mockingbird" */;
+			productName = Mockingbird;
 		};
 		0E89C5D02AE7A23400E2BDAF /* OrderedCollections */ = {
 			isa = XCSwiftPackageProductDependency;

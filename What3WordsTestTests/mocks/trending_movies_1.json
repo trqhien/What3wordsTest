@@ -1,0 +1,106 @@
+{
+  "page": 1,
+  "total_pages": 1000,
+  "total_results": 20000,
+  "results": [
+    {
+      "adult": false,
+      "backdrop_path": "/4DpVWbDmYanToTTkTp2SQLQX1p4.jpg",
+      "id": 807172,
+      "title": "The Exorcist: Believer",
+      "original_language": "en",
+      "original_title": "The Exorcist: Believer",
+      "overview": "When his daughter and her friend show signs of demonic possession, it unleashes a chain of events that forces single father, Victor Fielding, to confront the nadir of evil. Terrified and desperate, he seeks out the only person alive who's witnessed anything like it before.",
+      "poster_path": "/qVKirUdmoex8SdfUk8WDDWwrcCh.jpg",
+      "media_type": "movie",
+      "genre_ids": [
+        27
+      ],
+      "popularity": 703.686,
+      "release_date": "2023-10-04",
+      "video": false,
+      "vote_average": 5.465,
+      "vote_count": 157
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/dZbLqRjjiiNCpTYzhzL2NMvz4J0.jpg",
+      "id": 951491,
+      "title": "Saw X",
+      "original_language": "en",
+      "original_title": "Saw X",
+      "overview": "Between the events of 'Saw' and 'Saw II', a sick and desperate John Kramer travels to Mexico for a risky and experimental medical procedure in hopes of a miracle cure for his cancer, only to discover the entire operation is a scam to defraud the most vulnerable. Armed with a newfound purpose, the infamous serial killer returns to his work, turning the tables on the con artists in his signature visceral way through devious, deranged, and ingenious traps.",
+      "poster_path": "/aQPeznSu7XDTrrdCtT5eLiu52Yu.jpg",
+      "media_type": "movie",
+      "genre_ids": [
+        27,
+        53
+      ],
+      "popularity": 2879.587,
+      "release_date": "2023-09-26",
+      "video": false,
+      "vote_average": 7.346,
+      "vote_count": 356
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/1X7vow16X7CnCoexXh4H4F2yDJv.jpg",
+      "id": 466420,
+      "title": "Killers of the Flower Moon",
+      "original_language": "en",
+      "original_title": "Killers of the Flower Moon",
+      "overview": "When oil is discovered in 1920s Oklahoma under Osage Nation land, the Osage people are murdered one by one—until the FBI steps in to unravel the mystery.",
+      "poster_path": "/dB6Krk806zeqd0YNp2ngQ9zXteH.jpg",
+      "media_type": "movie",
+      "genre_ids": [
+        80,
+        18,
+        53
+      ],
+      "popularity": 584.853,
+      "release_date": "2023-10-18",
+      "video": false,
+      "vote_average": 7.924,
+      "vote_count": 337
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/8G50Gbincsi1WYJXTyqsFuXNyK.jpg",
+      "id": 987917,
+      "title": "Old Dads",
+      "original_language": "en",
+      "original_title": "Old Dads",
+      "overview": "A cranky middle-aged dad and his two best friends find themselves out of step in a changing world of millennial CEOs and powerful preschool principals.",
+      "poster_path": "/ax1rpxHCcXVwwfn0zSte1udoJwV.jpg",
+      "media_type": "movie",
+      "genre_ids": [
+        35
+      ],
+      "popularity": 194.29,
+      "release_date": "2023-10-20",
+      "video": false,
+      "vote_average": 6.349,
+      "vote_count": 63
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/628Dep6AxEtDxjZoGP78TsOxYbK.jpg",
+      "id": 575264,
+      "title": "Mission: Impossible - Dead Reckoning Part One",
+      "original_language": "en",
+      "original_title": "Mission: Impossible - Dead Reckoning Part One",
+      "overview": "Ethan Hunt and his IMF team embark on their most dangerous mission yet: To track down a terrifying new weapon that threatens all of humanity before it falls into the wrong hands. With control of the future and the world's fate at stake and dark forces from Ethan's past closing in, a deadly race around the globe begins. Confronted by a mysterious, all-powerful enemy, Ethan must consider that nothing can matter more than his mission—not even the lives of those he cares about most.",
+      "poster_path": "/NNxYkU70HPurnNCSiCjYAmacwm.jpg",
+      "media_type": "movie",
+      "genre_ids": [
+        28,
+        53
+      ],
+      "popularity": 998.192,
+      "release_date": "2023-07-08",
+      "video": false,
+      "vote_average": 7.724,
+      "vote_count": 1849
+    }
+  ]
+}

@@ -166,7 +166,7 @@ final class MovieListViewModel {
     
     func bind(loadMoretrigger: AnyPublisher<Void, Never>) {
         loadMoretrigger
-            .dropFirst(1)
+//            .dropFirst(1)
             .debounce(for: .milliseconds(300), scheduler: DispatchQueue.main)
             .sink { [weak self] in
                 self?.loadNextPageTrendingMovies()
