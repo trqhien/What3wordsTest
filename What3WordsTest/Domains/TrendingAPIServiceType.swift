@@ -8,5 +8,5 @@
 import Combine
 
 protocol TrendingAPIServiceType {
-    func getTrendingMovie(timeWindow: TimeWindow, page: Int) -> AnyPublisher<PaginationResponse<MovieDTO>, NetworkError>
+    func getTrendingMovie(timeWindow: TimeWindow, page: Int) -> AnyPublisher<PaginationResponse<Movie>, NetworkError>
 }

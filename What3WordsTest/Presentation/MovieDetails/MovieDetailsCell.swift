@@ -11,7 +11,7 @@ import TinyConstraints
 final class MovieDetailCell: UITableViewCell {
     private let backDropImageView: UIImageView = {
         let view = UIImageView()
-        view.contentMode = .scaleAspectFill
+        view.contentMode = .scaleAspectFit
         view.backgroundColor = .lightGray
         return view
     }()
@@ -62,8 +62,7 @@ final class MovieDetailCell: UITableViewCell {
     }
 
     // MARK: - Public helpers
-    func configure(with movie: MovieDetails) {
-
+    func configure(with movie: MovieDetailsEntity) {
         if let releaseDate = movie.releaseDate {
             titleLabel.text = "\(movie.title) (\(Calendar.current.component(.year, from: releaseDate)))"
         } else {
@@ -72,6 +71,13 @@ final class MovieDetailCell: UITableViewCell {
 
         overviewLabel.text = movie.overview
         descriptionLabel.text = generateDesctiptions(from: movie)
+        backDropImageView.kf.setImage(with: movie.backdrop)
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        backDropImageView.kf.cancelDownloadTask()
+        backDropImageView.image = nil
     }
 
     private func addSubviews() {
@@ -99,7 +105,7 @@ final class MovieDetailCell: UITableViewCell {
         overviewLabel.edgesToSuperview(excluding: .top, insets: .all(8))
     }
 
-    private func generateDesctiptions(from movie: MovieDetails) -> String {
+    private func generateDesctiptions(from movie: MovieDetailsEntity) -> String {
         var attributes: [String] = []
 
         if movie.voteAverage != 0 {

@@ -20,8 +20,8 @@ final class MovieListViewController: UIViewController {
     
     private var subscriptions = Set<AnyCancellable>()
     
-    private lazy var tableViewDataSource: UITableViewDiffableDataSource<Section, Movie> = {
-        let dataSource = UITableViewDiffableDataSource<Section, Movie>(tableView: tableView) { tableView, indexPath, movie in
+    private lazy var tableViewDataSource: UITableViewDiffableDataSource<Section, MovieEntity> = {
+        let dataSource = UITableViewDiffableDataSource<Section, MovieEntity>(tableView: tableView) { tableView, indexPath, movie in
             let cell = tableView.dequeueReusableCell(for: MovieCell.self, forIndexPath: indexPath)
             cell.configure(with: movie)
             return cell
@@ -101,7 +101,7 @@ final class MovieListViewController: UIViewController {
     }
     
     private func configureInitialDiffableSnapshot() {
-        var initialSnapshot = NSDiffableDataSourceSnapshot<Section, Movie>()
+        var initialSnapshot = NSDiffableDataSourceSnapshot<Section, MovieEntity>()
         initialSnapshot.appendSections([.trending])
         tableViewDataSource.apply(initialSnapshot, animatingDifferences: false)
     }
@@ -190,9 +190,9 @@ extension MovieListViewController {
 //        case loadMore
     }
     
-    func update(with movies: [Movie], animate: Bool = false) {
+    func update(with movies: [MovieEntity], animate: Bool = false) {
         DispatchQueue.main.async {
-            var snapshot = NSDiffableDataSourceSnapshot<Section, Movie>()
+            var snapshot = NSDiffableDataSourceSnapshot<Section, MovieEntity>()
             snapshot.appendSections([.trending])
             snapshot.appendItems(movies, toSection: .trending)
             self.tableViewDataSource.apply(snapshot, animatingDifferences: animate)

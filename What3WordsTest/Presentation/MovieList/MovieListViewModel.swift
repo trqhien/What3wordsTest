@@ -70,14 +70,14 @@ final class MovieListViewModel {
     @LazyInjected private var searchAPIService: SearchAPIServiceType
     
     @Published private var pagination: Pagination?
-    @Published private var trendingMovies: OrderedSet<Movie> = []
+    @Published private var trendingMovies: OrderedSet<MovieEntity> = []
     @Published var errorMessage: String?
     @Published private var isLoadingTrendingMovies: Bool = false
     @Published var isLoadingMore: Bool = false
     
     @Published private var isSearchActive: Bool = false
     @Published private var searchPagination: Pagination?
-    @Published private var searchedMovies: OrderedSet<Movie> = []
+    @Published private var searchedMovies: OrderedSet<MovieEntity> = []
     @Published var searchErrorMessage: String?
     @Published private var isSearching: Bool = false
     @Published var isLoadingMoreSearch: Bool = false
@@ -85,7 +85,7 @@ final class MovieListViewModel {
 //    @Published var emptyState: Either<Bool, String>
     // TODO: Add coordinator
     
-    @Published var displayedMovies: OrderedSet<Movie> = []
+    @Published var displayedMovies: OrderedSet<MovieEntity> = []
     @Published var isLoading: Bool = false
     
     private var subscriptions = Set<AnyCancellable>()
@@ -138,12 +138,12 @@ final class MovieListViewModel {
             .filter { $0.isNotEmpty }
             .map{ self.searchAPIService.searchMovies(queryString: $0, page: 1) }
             .switchToLatest()
-            .replaceError(with: PaginationResponse<MovieDTO>.empty)
+            .replaceError(with: PaginationResponse<Movie>.empty)
             .share()
         
         searched
             .map {
-                OrderedSet($0.results.map { Movie(from: $0) })
+                OrderedSet($0.results.map { MovieEntity(from: $0) })
             }
             .receive(on: DispatchQueue.main)
             .assign(to: &$searchedMovies)
@@ -189,7 +189,7 @@ final class MovieListViewModel {
                 }
             } receiveValue: { [weak self]  pagination in
                 self?.pagination = Pagination(currentPage: pagination.page, totalPages: pagination.totalPages)
-                self?.trendingMovies.append(contentsOf: pagination.results.map { Movie(from: $0)})
+                self?.trendingMovies.append(contentsOf: pagination.results.map { MovieEntity(from: $0)})
             }
             .store(in: &subscriptions)
     }
@@ -205,7 +205,7 @@ final class MovieListViewModel {
             } receiveValue: { [weak self]  newPagination in
                 self?.pagination = Pagination(currentPage: newPagination.page, totalPages: newPagination.totalPages)
                 self?.trendingMovies = self?.trendingMovies
-                    .union(OrderedSet(newPagination.results.map { Movie(from: $0) }))
+                    .union(OrderedSet(newPagination.results.map { MovieEntity(from: $0) }))
                     ?? []
             }
             .store(in: &subscriptions)

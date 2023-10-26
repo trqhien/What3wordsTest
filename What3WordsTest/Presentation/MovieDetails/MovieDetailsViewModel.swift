@@ -41,6 +41,6 @@ extension MovieDetailsViewModel {
     enum LoadingState {
         case pristine
         case loading
-        case loaded(Result<MovieDetails, NetworkError>)
+        case loaded(Result<MovieDetailsEntity, NetworkError>)
     }
 }

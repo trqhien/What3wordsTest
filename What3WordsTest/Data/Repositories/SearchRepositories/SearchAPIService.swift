@@ -13,10 +13,10 @@ import Combine
 struct SearchAPIService: SearchAPIServiceType {
     let client = MoyaClient<SearchAPI>()
     
-    func searchMovies(queryString: String, page: Int) -> AnyPublisher<PaginationResponse<MovieDTO>, NetworkError> {
+    func searchMovies(queryString: String, page: Int) -> AnyPublisher<PaginationResponse<Movie>, NetworkError> {
         
         return client
             .requestPublisher(.movie(queryString: queryString, page: page))
-            .mapToPagination(MovieDTO.self)
+            .mapToPagination(Movie.self)
     }
 }

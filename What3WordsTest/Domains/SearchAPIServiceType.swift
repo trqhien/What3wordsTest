@@ -9,5 +9,5 @@ import Foundation
 import Combine
 
 protocol SearchAPIServiceType {
-    func searchMovies(queryString: String, page: Int) -> AnyPublisher<PaginationResponse<MovieDTO>, NetworkError>
+    func searchMovies(queryString: String, page: Int) -> AnyPublisher<PaginationResponse<Movie>, NetworkError>
 }

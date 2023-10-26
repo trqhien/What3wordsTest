@@ -140,7 +140,7 @@ final class MovieDetailsViewController: UIViewController {
         viewModel.bind(loadOnAppear: loadOnAppear.eraseToAnyPublisher())
     }
     
-    private func updateTable(with movieDetails: MovieDetails) {
+    private func updateTable(with movieDetails: MovieDetailsEntity) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Row>()
         snapshot.appendSections([.movie])
         snapshot.appendItems([.movie(movieDetails)], toSection: .movie)
@@ -156,7 +156,7 @@ extension MovieDetailsViewController {
     }
     
     enum Row: Hashable {
-        case movie(MovieDetails)
-        case credit(MovieDetails)
+        case movie(MovieDetailsEntity)
+        case credit(MovieDetailsEntity)
     }
 }

@@ -8,7 +8,7 @@
 import Codextended
 import Foundation
 
-struct MovieDTO: Decodable {
+struct Movie: Decodable {
     let isAdult: Bool
     let backdropPath: String?
     let id: Int

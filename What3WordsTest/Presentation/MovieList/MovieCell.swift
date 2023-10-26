@@ -61,8 +61,6 @@ class MovieCell: UITableViewCell {
         return label
     }()
     
-    private var cancellable: AnyCancellable?
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubviews()
@@ -72,7 +70,7 @@ class MovieCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with movie: Movie) {
+    func configure(with movie: MovieEntity) {
         titleLabel.text = movie.title.capitalized
         voteCountLabel.text = movie.voteCount > 1
             ? "\(movie.voteCount) votes"
@@ -87,12 +85,8 @@ class MovieCell: UITableViewCell {
         }
 
         overviewLabel.text = movie.overview
-        
-        cancellable = movie.poster
-            .sink(receiveValue: { [unowned self] imageBuilder in
-                cancelImageLoading()
-                imageBuilder?.set(to: self.posterImageView)
-            })
+
+        posterImageView.kf.setImage(with: movie.poster)
     }
 
     private func addSubviews() {
@@ -130,16 +124,10 @@ class MovieCell: UITableViewCell {
         voteCountLabel.bottom(to: ratingLabel)
     }
     
-    private func cancelImageLoading() {
-        print("Cancelling \(titleLabel.text!)")
-        cancellable?.cancel()
-        posterImageView.kf.cancelDownloadTask()
-        posterImageView.image = nil
-    }
-    
     override func prepareForReuse() {
         super.prepareForReuse()
-        cancelImageLoading()
+        posterImageView.kf.cancelDownloadTask()
+        posterImageView.image = nil
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

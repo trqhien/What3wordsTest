@@ -9,5 +9,5 @@ import Foundation
 import Combine
 
 protocol MoviesAPIServiceType {
-    func getMovieDetails(id: Int) -> AnyPublisher<MovieDetails, NetworkError>
+    func getMovieDetails(id: Int) -> AnyPublisher<MovieDetailsEntity, NetworkError>
 }
