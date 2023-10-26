@@ -7,17 +7,18 @@
 
 import UIKit
 import TinyConstraints
+import Combine
 
 class MovieCell: UITableViewCell {
     
-    lazy var posterImageView: UIImageView = {
+    private lazy var posterImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.backgroundColor = .lightGray
         return imageView
     }()
     
-    lazy var titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.boldSystemFont(ofSize: 20)
@@ -26,7 +27,7 @@ class MovieCell: UITableViewCell {
         return label
     }()
     
-    lazy var overviewLabel: UILabel = {
+    private lazy var overviewLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
         label.textAlignment = .left
@@ -34,7 +35,7 @@ class MovieCell: UITableViewCell {
         return label
     }()
     
-    lazy var dateLabel: UILabel = {
+    private lazy var dateLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12)
         label.textAlignment = .left
@@ -42,7 +43,7 @@ class MovieCell: UITableViewCell {
         return label
     }()
     
-    lazy var ratingLabel: UILabel = {
+    private lazy var ratingLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12)
         label.textAlignment = .center //.left
@@ -52,7 +53,7 @@ class MovieCell: UITableViewCell {
         return label
     }()
     
-    lazy var voteCountLabel: UILabel = {
+    private lazy var voteCountLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12)
         label.textAlignment = .left
@@ -60,6 +61,7 @@ class MovieCell: UITableViewCell {
         return label
     }()
     
+    private var cancellable: AnyCancellable?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -85,6 +87,12 @@ class MovieCell: UITableViewCell {
         }
 
         overviewLabel.text = movie.overview
+        
+        cancellable = movie.poster
+            .sink(receiveValue: { [unowned self] imageBuilder in
+                cancelImageLoading()
+                imageBuilder?.set(to: self.posterImageView)
+            })
     }
 
     private func addSubviews() {
@@ -102,7 +110,7 @@ class MovieCell: UITableViewCell {
 
         titleLabel.top(to: posterImageView)
         titleLabel.leftToRight(of: posterImageView, offset: 8)
-        titleLabel.rightToSuperview()
+        titleLabel.rightToSuperview(offset: 8)
         
         dateLabel.topToBottom(of: titleLabel, offset: 8)
         dateLabel.left(to: titleLabel)
@@ -120,6 +128,18 @@ class MovieCell: UITableViewCell {
         voteCountLabel.leftToRight(of: ratingLabel, offset: 8)
         voteCountLabel.rightToSuperview(relation: .equalOrLess)
         voteCountLabel.bottom(to: ratingLabel)
+    }
+    
+    private func cancelImageLoading() {
+        print("Cancelling \(titleLabel.text!)")
+        cancellable?.cancel()
+        posterImageView.kf.cancelDownloadTask()
+        posterImageView.image = nil
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        cancelImageLoading()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

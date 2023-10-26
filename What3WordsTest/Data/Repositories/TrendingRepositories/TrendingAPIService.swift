@@ -12,9 +12,9 @@ import Combine
 struct TrendingAPIService: TrendingAPIServiceType {
     let client = MoyaClient<TrendingAPI>()
 
-    func getTrendingMovie(timeWindow: TimeWindow, page: Int) -> AnyPublisher<PaginationResponse<Movie>, NetworkError> {
+    func getTrendingMovie(timeWindow: TimeWindow, page: Int) -> AnyPublisher<PaginationResponse<MovieDTO>, NetworkError> {
         return client
             .requestPublisher(.movie(timeWindow: timeWindow, page: page))
-            .mapToPagination(Movie.self)
+            .mapToPagination(MovieDTO.self)
     }
 }

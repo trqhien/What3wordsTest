@@ -47,7 +47,7 @@ struct Pagination {
         return currentPage < nextPage
     }
     
-    static func dto<M>(from response: PaginationResponse<M>) -> Pagination? where M: Decodable {
+    static func fromResponse<M>(_ response: PaginationResponse<M>) -> Pagination? where M: Decodable {
         return response.isEmpty
             ? nil
             : Pagination(currentPage: response.page, totalPages: response.totalPages)
@@ -138,16 +138,18 @@ final class MovieListViewModel {
             .filter { $0.isNotEmpty }
             .map{ self.searchAPIService.searchMovies(queryString: $0, page: 1) }
             .switchToLatest()
-            .replaceError(with: PaginationResponse<Movie>.empty)
+            .replaceError(with: PaginationResponse<MovieDTO>.empty)
             .share()
         
         searched
-            .map { OrderedSet($0.results) }
+            .map {
+                OrderedSet($0.results.map { Movie(from: $0) })
+            }
             .receive(on: DispatchQueue.main)
             .assign(to: &$searchedMovies)
         
         searched
-            .map{ Pagination.dto(from: $0) }
+            .map{ Pagination.fromResponse($0) }
             .receive(on: DispatchQueue.main)
             .assign(to: &$searchPagination)
         
@@ -187,7 +189,7 @@ final class MovieListViewModel {
                 }
             } receiveValue: { [weak self]  pagination in
                 self?.pagination = Pagination(currentPage: pagination.page, totalPages: pagination.totalPages)
-                self?.trendingMovies.append(contentsOf: pagination.results)
+                self?.trendingMovies.append(contentsOf: pagination.results.map { Movie(from: $0)})
             }
             .store(in: &subscriptions)
     }
@@ -202,7 +204,9 @@ final class MovieListViewModel {
                 self?.isLoadingMore = false
             } receiveValue: { [weak self]  newPagination in
                 self?.pagination = Pagination(currentPage: newPagination.page, totalPages: newPagination.totalPages)
-                self?.trendingMovies = self?.trendingMovies.union(OrderedSet(newPagination.results)) ?? []
+                self?.trendingMovies = self?.trendingMovies
+                    .union(OrderedSet(newPagination.results.map { Movie(from: $0) }))
+                    ?? []
             }
             .store(in: &subscriptions)
     }

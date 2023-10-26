@@ -8,6 +8,8 @@
 import Moya
 
 final class MoyaClient<T: BaseTargetType>: MoyaProvider<T> {
+    // TODO: COnfigure cache https://github.com/Moya/Moya/issues/976
+    
     init() {
         super.init(
             plugins: [

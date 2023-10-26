@@ -16,5 +16,7 @@ extension Resolver: ResolverRegistering {
 //          register { TrendingAPIMockService() }.implements(TrendingAPIServiceType.self)
           register { SearchAPIService() }.implements(SearchAPIServiceType.self)
           register { MoviesAPIService() }.implements(MoviesAPIServiceType.self)
+          register { ImageLoaderService() }.implements(ImageLoaderServiceType.self)
+          register { ImageCacheService() }.implements(ImageCacheServiceType.self)
       }
 }
