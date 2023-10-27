@@ -39,7 +39,7 @@ enum NetworkError: LocalizedError {
         }
     }
 
-    /// A localized message describing the reason for the failure. Use this to customize error message that is showed to user
+    /// A localized message describing the reason for the failure. Use this to customize error message that is shown to user
     var failureReason: String? {
         switch self {
         case .serverError(let serverError):
