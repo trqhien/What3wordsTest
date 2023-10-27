@@ -66,6 +66,7 @@ final class MovieListViewModel {
                     return _trendingMovies
                 }
             }
+            .removeDuplicates()
             .assign(to: &$displayedMovies)
         
         Publishers
@@ -149,9 +150,11 @@ final class MovieListViewModel {
         let start = onAppearLoad.share()
         
         let output = start
-            .map{ self.trendingAPIService.getTrendingMovie(timeWindow: .day, page: 1) }
+            .map{ self
+                .trendingAPIService.getTrendingMovie(timeWindow: .day, page: 1)
+                .mapToResult()
+            }
             .switchToLatest()
-            .mapToResult()
             .share()
         
         output
@@ -206,7 +209,7 @@ final class MovieListViewModel {
             .store(in: &subscriptions)
     }
     
-    func loadNextPageTrendingMovies() {
+    private func loadNextPageTrendingMovies() {
         guard let pagination = self.pagination, !isLoadingMore, !isSearchActive else { return }
         isLoadingMore = true
 

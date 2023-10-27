@@ -10,15 +10,6 @@
       }
     },
     {
-      "identity" : "atlantis",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/ProxymanApp/atlantis",
-      "state" : {
-        "branch" : "main",
-        "revision" : "45794259bf068248f34878631a3850201d51602f"
-      }
-    },
-    {
       "identity" : "codextended",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/JohnSundell/Codextended",

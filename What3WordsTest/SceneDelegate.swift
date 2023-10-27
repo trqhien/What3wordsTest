@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Atlantis
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -18,7 +17,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = UINavigationController(rootViewController: MovieListViewController())
         window?.makeKeyAndVisible()
-        Atlantis.start() // TODO: Remove this in prod. Create a debug scheme for this
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

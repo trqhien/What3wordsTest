@@ -47,7 +47,6 @@
 		0E2300D92AE5012900F69E9B /* UITableView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2300D82AE5012900F69E9B /* UITableView+Reusable.swift */; };
 		0E2300DB2AE5050400F69E9B /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2300DA2AE5050400F69E9B /* MovieCell.swift */; };
 		0E5FC6A82AE878FF00558193 /* TrendingAPIMockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5FC6A72AE878FF00558193 /* TrendingAPIMockService.swift */; };
-		0E5FC6AB2AE8C3A100558193 /* Atlantis in Frameworks */ = {isa = PBXBuildFile; productRef = 0E5FC6AA2AE8C3A100558193 /* Atlantis */; };
 		0E5FC6AD2AE8CD8700558193 /* CachePolicyPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5FC6AC2AE8CD8700558193 /* CachePolicyPlugin.swift */; };
 		0E5FC6B02AE8F94000558193 /* MovieEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5FC6AF2AE8F94000558193 /* MovieEntity.swift */; };
 		0E5FC6B22AE8FE4300558193 /* ImageLoaderAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5FC6B12AE8FE4300558193 /* ImageLoaderAPI.swift */; };
@@ -154,7 +153,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E5FC6AB2AE8C3A100558193 /* Atlantis in Frameworks */,
 				0E2300A82AE3A94600F69E9B /* Resolver in Frameworks */,
 				0E2300A52AE3A4EA00F69E9B /* Codextended in Frameworks */,
 				0E5FC6C12AEA076400558193 /* Kingfisher in Frameworks */,
@@ -487,7 +485,6 @@
 				0E2300D32AE4E1B500F69E9B /* TinyConstraints */,
 				0E1635A22AE77AA900EF3C44 /* CombineExt */,
 				0E89C5D02AE7A23400E2BDAF /* OrderedCollections */,
-				0E5FC6AA2AE8C3A100558193 /* Atlantis */,
 				0E5FC6C02AEA076400558193 /* Kingfisher */,
 			);
 			productName = What3WordsTest;
@@ -574,7 +571,6 @@
 				0E2300D22AE4E1B500F69E9B /* XCRemoteSwiftPackageReference "TinyConstraints" */,
 				0E1635A12AE77AA900EF3C44 /* XCRemoteSwiftPackageReference "CombineExt" */,
 				0E89C5CF2AE7A23400E2BDAF /* XCRemoteSwiftPackageReference "swift-collections" */,
-				0E5FC6A92AE8C3A100558193 /* XCRemoteSwiftPackageReference "atlantis" */,
 				0E5FC6BF2AEA076400558193 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				0E5FC6D82AEA6F1E00558193 /* XCRemoteSwiftPackageReference "mockingbird" */,
 			);
@@ -1068,14 +1064,6 @@
 				kind = branch;
 			};
 		};
-		0E5FC6A92AE8C3A100558193 /* XCRemoteSwiftPackageReference "atlantis" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ProxymanApp/atlantis";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		0E5FC6BF2AEA076400558193 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -1132,11 +1120,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0E2300D22AE4E1B500F69E9B /* XCRemoteSwiftPackageReference "TinyConstraints" */;
 			productName = TinyConstraints;
-		};
-		0E5FC6AA2AE8C3A100558193 /* Atlantis */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0E5FC6A92AE8C3A100558193 /* XCRemoteSwiftPackageReference "atlantis" */;
-			productName = Atlantis;
 		};
 		0E5FC6C02AEA076400558193 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
