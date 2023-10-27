@@ -41,6 +41,7 @@ extension SearchAPI: BaseTargetType {
     }
     
     var cachePolicy: CachePolicy? {
-        return .reloadIgnoringLocalCacheData
+        // return .reloadIgnoringLocalCacheData
+        return .returnCacheDataElseLoad
     }
 }

@@ -9,31 +9,6 @@ import Combine
 import UIKit
 import OrderedCollections
 
-struct MoviewListEvent {
-    // called when a screen becomes visible
-    let appear: AnyPublisher<Void, Never>
-        
-    // triggered when a search query is updated
-    let search: AnyPublisher<String, Never>
-        
-    // called when a user selected an item from the list
-    let selection: AnyPublisher<Int, Never>
-}
-
-protocol StateMachine {
-    associatedtype State
-    associatedtype Event
-    
-    func transform(event: Event) -> State
-}
-
-class MoviewListState {
-    @Published var currentTrendingMoviePage: Int?
-    @Published var trendingMovies: [Movie] = []
-    @Published var currentSearchMoviePage: Int?
-    @Published var searchMovies: [Movie] = []
-}
-
 struct Pagination {
     let currentPage: Int
     let totalPages: Int
@@ -59,11 +34,6 @@ struct Pagination {
     }
 }
 
-enum Either<Left, Right> {
-    case left(Left)
-    case right(Right)
-}
-
 // TODO: Create State machine
 final class MovieListViewModel {
     @LazyInjected private var trendingAPIService: TrendingAPIServiceType
@@ -71,22 +41,18 @@ final class MovieListViewModel {
     
     @Published private var pagination: Pagination?
     @Published private var trendingMovies: OrderedSet<MovieEntity> = []
-    @Published var errorMessage: String?
-    @Published private var isLoadingTrendingMovies: Bool = false
+    
+    @Published var trendingLoadingState: LoadingState = .pristine
     @Published var isLoadingMore: Bool = false
     
     @Published private var isSearchActive: Bool = false
-    @Published private var searchPagination: Pagination?
     @Published private var searchedMovies: OrderedSet<MovieEntity> = []
-    @Published var searchErrorMessage: String?
-    @Published private var isSearching: Bool = false
-    @Published var isLoadingMoreSearch: Bool = false
+    @Published private var searchLoadingState: LoadingState = .pristine
     
-//    @Published var emptyState: Either<Bool, String>
     // TODO: Add coordinator
     
     @Published var displayedMovies: OrderedSet<MovieEntity> = []
-    @Published var isLoading: Bool = false
+    @Published var loadingState: LoadingState = .pristine
     
     private var subscriptions = Set<AnyCancellable>()
     
@@ -103,70 +69,136 @@ final class MovieListViewModel {
             .assign(to: &$displayedMovies)
         
         Publishers
-            .CombineLatest3($isLoadingTrendingMovies, $isSearching, $isSearchActive)
-            .map { _isLoadingTrendingMovies, _isSearching, _isSearchActive in
+            .CombineLatest3($trendingLoadingState, $searchLoadingState, $isSearchActive)
+            .map { _trendingLoadingState, _searchLoadingState, _isSearchActive in
                 if (_isSearchActive) {
-                    return _isSearching
+                    return _searchLoadingState
                 } else {
-                    return _isLoadingTrendingMovies
+                    return _trendingLoadingState
                 }
             }
-            .assign(to: &$isLoading)
+            .assign(to: &$loadingState)
             
     }
     
     func bind(searchQuery: AnyPublisher<String, Never>) {
-        let search = searchQuery
-            .debounce(for: .milliseconds(300), scheduler: DispatchQueue.global())
+        let startSearch = searchQuery
+            .debounce(for: .milliseconds(500), scheduler: DispatchQueue.global())
             .removeDuplicates()
             .share()
         
-        search
+        // Reset empty state message for every new search
+        startSearch
             .sink(receiveValue: { [weak self] value in
-                if value.isEmpty {
-                    self?.searchedMovies = []
-                }
+                self?.searchLoadingState = .pristine
+                self?.searchedMovies = []
             })
             .store(in: &subscriptions)
     
         
-        search
+        startSearch
             .map { $0.isNotEmpty }
             .assign(to: &$isSearchActive)
         
-        let searched = search
+        let searchedOutput = startSearch
             .filter { $0.isNotEmpty }
-            .map{ self.searchAPIService.searchMovies(queryString: $0, page: 1) }
+            .map{ self.searchAPIService.searchMovies(queryString: $0, page: 1).mapToResult() }
             .switchToLatest()
-            .replaceError(with: PaginationResponse<Movie>.empty)
+            .map { result -> LoadingState in
+                switch result {
+                case .failure(let err):
+                    return .loaded(.failure(err))
+                case .success(let res):
+                    if res.results.isEmpty {
+                        return .loaded(.failure(.custom("We didn't find any movie with this title")))
+                    } else {
+                        let orderSet = OrderedSet(res.results.map { MovieEntity(from: $0) })
+                        return .loaded(.success(orderSet))
+                    }
+                }
+            }
             .share()
         
-        searched
-            .map {
-                OrderedSet($0.results.map { MovieEntity(from: $0) })
+        searchedOutput
+            .sink { [weak self] state in
+                if let movies = state.loadedResult {
+                    self?.searchedMovies = movies
+                }
             }
-            .receive(on: DispatchQueue.main)
-            .assign(to: &$searchedMovies)
+            .store(in: &subscriptions)
         
-        searched
-            .map{ Pagination.fromResponse($0) }
-            .receive(on: DispatchQueue.main)
-            .assign(to: &$searchPagination)
+        searchedOutput
+            .assign(to: &$searchLoadingState)
         
-        search
+        startSearch
             .map { _ in true }
-            .merge(with: searched
+            .merge(with: searchedOutput
                 .map { _ in false }
                 .delay(for: .seconds(0.5), scheduler: DispatchQueue.global())
             )
             .replaceError(with: false)
-            .receive(on: DispatchQueue.main)
-            .assign(to: &$isSearching)
+            .sink(receiveValue: { [weak self] isLoading in
+                if isLoading {
+                    self?.loadingState = .loading
+                }
+            })
+            .store(in: &subscriptions)
+    }
+    
+    func bind(onAppearLoad: AnyPublisher<Void, Never>) {
+        let start = onAppearLoad.share()
+        
+        let output = start
+            .map{ self.trendingAPIService.getTrendingMovie(timeWindow: .day, page: 1) }
+            .switchToLatest()
+            .mapToResult()
+            .share()
+        
+        output
+            .sink(receiveValue: { [weak self] result in
+                if case let .success(res) = result, !res.isEmpty {
+                    self?.pagination = Pagination(currentPage: res.page, totalPages: res.totalPages)
+                    self?.trendingMovies.append(contentsOf: res.results.map { MovieEntity(from: $0)})
+                }
+            })
+            .store(in: &subscriptions)
+        
+        
+        output
+            .map { result -> LoadingState in
+                switch result {
+                case .failure(let err):
+                    return .loaded(.failure(err))
+                case .success(let res):
+                    if res.results.isEmpty {
+                        // Athough this is not likely to happen but just to be safe to handle empty state here
+                        return .loaded(.failure(.custom("No results")))
+                    } else {
+                        let orderSet = OrderedSet(res.results.map { MovieEntity(from: $0) })
+                        return .loaded(.success(orderSet))
+                    }
+                }
+            }
+            .assign(to: &$trendingLoadingState)
+        
+        start
+            .map { _ in true }
+            .merge(with: output
+                .map { _ in false }
+                .delay(for: .seconds(0.5), scheduler: DispatchQueue.global())
+            )
+            .replaceError(with: false)
+            .sink(receiveValue: { [weak self] isLoading in
+                if isLoading {
+                    self?.trendingLoadingState = .loading
+                }
+            })
+            .store(in: &subscriptions)
     }
     
     func bind(loadMoretrigger: AnyPublisher<Void, Never>) {
         loadMoretrigger
-//            .dropFirst(1)
+            //.dropFirst(1)
             .debounce(for: .milliseconds(300), scheduler: DispatchQueue.main)
             .sink { [weak self] in
                 self?.loadNextPageTrendingMovies()
@@ -174,28 +206,8 @@ final class MovieListViewModel {
             .store(in: &subscriptions)
     }
     
-    func loadTrendingMovies() {
-        isLoadingTrendingMovies = true
-        
-        trendingAPIService
-            .getTrendingMovie(timeWindow: .day, page: 1)
-            .sink { [weak self] completion in
-                self?.isLoadingTrendingMovies = false
-                
-                if case let .failure(err) = completion {
-                    self?.errorMessage = err.localizedDescription
-                } else {
-                    self?.errorMessage = nil
-                }
-            } receiveValue: { [weak self]  pagination in
-                self?.pagination = Pagination(currentPage: pagination.page, totalPages: pagination.totalPages)
-                self?.trendingMovies.append(contentsOf: pagination.results.map { MovieEntity(from: $0)})
-            }
-            .store(in: &subscriptions)
-    }
-    
     func loadNextPageTrendingMovies() {
-        guard let pagination = self.pagination, !isLoadingMore else { return }
+        guard let pagination = self.pagination, !isLoadingMore, !isSearchActive else { return }
         isLoadingMore = true
 
         trendingAPIService
@@ -209,5 +221,34 @@ final class MovieListViewModel {
                     ?? []
             }
             .store(in: &subscriptions)
+    }
+}
+
+extension MovieListViewModel {
+    enum LoadingState {
+        case pristine
+        case loading
+        case loaded(Result<OrderedSet<MovieEntity>, NetworkError>)
+        
+        var loadedResult: OrderedSet<MovieEntity>? {
+            switch self {
+            case .loaded(let result):
+                return try? result.get()
+            default:
+                return nil
+            }
+        }
+        
+        var loadedError: NetworkError? {
+            switch self {
+            case .loaded(let result):
+                if case let .failure(err) = result {
+                    return err
+                }
+                return nil
+            default:
+                return nil
+            }
+        }
     }
 }

@@ -104,7 +104,7 @@ class MovieCell: UITableViewCell {
 
         titleLabel.top(to: posterImageView)
         titleLabel.leftToRight(of: posterImageView, offset: 8)
-        titleLabel.rightToSuperview(offset: 8)
+        titleLabel.rightToSuperview(offset: -8)
         
         dateLabel.topToBottom(of: titleLabel, offset: 8)
         dateLabel.left(to: titleLabel)
@@ -112,7 +112,7 @@ class MovieCell: UITableViewCell {
 
         overviewLabel.topToBottom(of: dateLabel, offset: 8)
         overviewLabel.left(to: titleLabel)
-        overviewLabel.rightToSuperview()
+        overviewLabel.right(to: titleLabel)
 
         ratingLabel.topToBottom(of: overviewLabel, offset: 8)
         ratingLabel.left(to: titleLabel)

@@ -22,8 +22,10 @@ struct ServerError: Decodable {
 enum NetworkError: LocalizedError {
     case serverError(ServerError)
     case moyaError(MoyaError)
+    case custom(String)
     case unknown(Error)
     
+    /// Localized message for debuggin purposes. Don't show this to user
     var errorDescription: String? {
         switch self {
         case .serverError(let serverError):
@@ -32,14 +34,18 @@ enum NetworkError: LocalizedError {
             return moyaError.errorDescription
         case .unknown(let error):
             return "Unexpected error: \(error.localizedDescription)"
+        case .custom(let message):
+            return message
         }
     }
 
-    /// A localized message describing the reason for the failure.
+    /// A localized message describing the reason for the failure. Use this to customize error message that is showed to user
     var failureReason: String? {
         switch self {
         case .serverError(let serverError):
             return serverError.statusMessage
+        case .custom(let message):
+            return message
         default:
             return "An error has occured"
         }

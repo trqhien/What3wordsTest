@@ -16,6 +16,7 @@ final class MovieListViewController: UIViewController {
     private var viewModel: MovieListViewModel
     
     private let scrollToBottom = PassthroughSubject<Void, Never>()
+    private let onAppearLoad = PassthroughSubject<Void, Never>()
 //    private let selection = PassthroughSubject<Int, Never>()
     
     private var subscriptions = Set<AnyCancellable>()
@@ -81,7 +82,7 @@ final class MovieListViewController: UIViewController {
         configUI()
         configureInitialDiffableSnapshot()
         bind(to: viewModel)
-        viewModel.loadTrendingMovies()
+        onAppearLoad.send()
     }
     
     private func configUI() {
@@ -114,15 +115,31 @@ final class MovieListViewController: UIViewController {
             }
             .store(in: &subscriptions)
         
-        viewModel.$isLoading
+        viewModel.$loadingState
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] isLoading in
-                if isLoading {
+            .sink { [weak self] state in
+                switch state {
+                case .loading:
                     self?.activityIndicator.startAnimating()
                     self?.tableView.isHidden = true
-                } else{
+                    self?.errorLabel.text = nil
+                    self?.errorLabel.isHidden = true
+                case .loaded(let result):
                     self?.activityIndicator?.stopAnimating()
-                    self?.tableView.isHidden = false
+                    switch result {
+                    case .failure(let err):
+                        self?.errorLabel.text = err.failureReason
+                        self?.errorLabel.isHidden = false
+                        self?.tableView.isHidden = true
+                    case .success:
+                        self?.errorLabel.text = nil
+                        self?.errorLabel.isHidden = true
+                        self?.tableView.isHidden = false
+                    }
+                case .pristine:
+                    self?.errorLabel.text = nil
+                    self?.errorLabel.isHidden = true
+                    break
                 }
             }
             .store(in: &subscriptions)
@@ -136,22 +153,7 @@ final class MovieListViewController: UIViewController {
             }
             .store(in: &subscriptions)
         
-        viewModel.$errorMessage
-            .receive(on: DispatchQueue.main)
-            .sink { [weak errorLabel] errorMessage in
-                
-                errorLabel?.text = errorMessage
-                
-                if errorMessage == nil {
-//                    errorLabel?.isHidden = true
-//                    self?.tableView.isHidden = false
-                } else {
-//                    errorLabel?.isHidden = false
-//                    self?.tableView.isHidden = true
-                }
-            }
-            .store(in: &subscriptions)
-        
+        viewModel.bind(onAppearLoad: onAppearLoad.eraseToAnyPublisher())
         viewModel.bind(loadMoretrigger: scrollToBottom.eraseToAnyPublisher())
         viewModel.bind(searchQuery: searchBar.textDidChangePublisher)
     }
