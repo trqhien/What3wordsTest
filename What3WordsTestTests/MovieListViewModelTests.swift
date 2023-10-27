@@ -28,6 +28,7 @@ final class MovieListViewModelTests: XCTestCase {
     }
 
     func testLoadTrendingMovies_ShouldReturnCorrectly() throws {
+        let onAppear = PassthroughSubject<Void, Never>()
         var expected: OrderedSet<MovieEntity> = []
         let movies = PaginationResponse<Movie>.loadFromFile("trending_movies_1")
         
@@ -39,10 +40,11 @@ final class MovieListViewModelTests: XCTestCase {
                 expectation.fulfill()
             }
             .store(in: &subscriptions)
+        vm.bind(onAppearLoad: onAppear.eraseToAnyPublisher())
         
         given(trendingMockService.getTrendingMovie(timeWindow: .day, page: 1)).willReturn(MockNetworkPublisher(movies).eraseToAnyPublisher())
         
-        vm.loadTrendingMovies()
+        onAppear.send()
         waitForExpectations(timeout: 1.0, handler: nil)
         XCTAssertEqual(expected.count, 5)
         XCTAssertEqual(expected.map { $0.id }, [807172, 951491, 466420, 987917, 575264])
@@ -50,6 +52,7 @@ final class MovieListViewModelTests: XCTestCase {
     
     func testLoadNextPageTrendingMovies_ShouldNotContainDuplicates() throws {
         let loadNext = PassthroughSubject<Void, Never>()
+        let onAppear = PassthroughSubject<Void, Never>()
         let movies_page_1 = PaginationResponse<Movie>.loadFromFile("trending_movies_1")
         let movies_page_2 = PaginationResponse<Movie>.loadFromFile("trending_movies_2")
         
@@ -68,11 +71,12 @@ final class MovieListViewModelTests: XCTestCase {
                 }
             }
             .store(in: &subscriptions)
+        vm.bind(onAppearLoad: onAppear.eraseToAnyPublisher())
         
         given(trendingMockService.getTrendingMovie(timeWindow: .day, page: 1)).willReturn(MockNetworkPublisher(movies_page_1).eraseToAnyPublisher())
         given(trendingMockService.getTrendingMovie(timeWindow: .day, page: 2)).willReturn(MockNetworkPublisher(movies_page_2).eraseToAnyPublisher())
         
-        vm.loadTrendingMovies()
+        onAppear.send()
         wait(for: [expectation1], timeout: 1)
         loadNext.send()
         wait(for: [expectation2], timeout: 1.5)
